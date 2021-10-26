@@ -21,7 +21,6 @@ public class Main extends Application {
 			GridPane grid = new GridPane();
 			grid.setVgap(5);
 			grid.setHgap(5);
-			System.out.println("Comment added by me");
 			Text title = new Text("SCHEDULE VISUALIZER");
 			title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
 			grid.add(title, 50, 10);
@@ -39,21 +38,19 @@ public class Main extends Application {
 			submit.setOnAction((event) -> {
 				String getText = text.getText();
 				String[] list = getText.split("\\n");
-				int count = 12;
+				int count = 0;
 				String course = "";
-				for (int i = 12; i < list.length; i++) {
-					if (count == 12 || count == 23 || count == 34 || count == 45) {
-						course += list[i] + "\n";
-						course += list[i+1] + "\n";
-						course += list[i+5] + "\n";
-						course += list[i+6] + "\n";
-						course += "\n";
+				for (int i = 0; i < list.length; i++) {
+					if (i == 0) {
+						Course newCourse = new Course(list[i], list[i+1], list[i+5], list[i+6], list[i+8] + " " + list[i+9], list[i+10]);
+						newCourse.coursePrint();
+					}else if(i == count  + 11) {
+						Course newCourse = new Course(list[i], list[i+1], list[i+5], list[i+6], list[i+8] + " " + list[i+9], list[i+10]);
+						newCourse.coursePrint();
+						count  = count + 11;
 					}
-					count++;
+					
 				}
-				Alert alert = new Alert(Alert.AlertType.NONE);
-				alert.setContentText(course);
-				alert.show();
 			});
 		} catch(Exception e) {
 			e.printStackTrace();
